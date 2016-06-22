@@ -37,4 +37,27 @@ describe SudokuSolver::Parser do
         [7, 9, 0, 4, 0, 1, 0, 0, 0]
       ])
   end
+
+  it 'when passed an emtpy string should raise exception' do
+    parser = SudokuSolver::Parser.new(configuration)
+
+    expect { parser.parse('') }.
+      to raise_error StandardError, 'Empty string passed'
+  end
+
+  it 'when passed a wrong format string should raise exception' do
+    wrong_format_puzzles = [
+      "073195268|856342791|921687534|347526189|582914673|619873452|234769815|165238947|798451326",
+      "47319526|856342791|921687534|347526189|582914673|619873452|234769815|165238947|798451326",
+      "a73195268|856342791|921687534|347526189|582914673|619873452|234769815|165238947|798451326",
+      "4-73195268|856342791|921687534|347526189|582914673|619873452|234769815|165238947|798451326"
+    ]
+
+    parser = SudokuSolver::Parser.new(configuration)
+
+    wrong_format_puzzles.each do |str|
+      expect { parser.parse(str) }.
+        to raise_error StandardError, 'Wrong format puzzle passed'
+    end
+  end
 end
