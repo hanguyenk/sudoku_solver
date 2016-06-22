@@ -14,4 +14,20 @@ describe SudokuSolver::Configuration do
         to eq('.')
     end
   end
+
+  context 'can change configuration of' do
+    it 'row delimiter to -' do
+      configuration.row_delimiter = '-'
+
+      expect(configuration.row_delimiter).
+        to eq('-')
+    end
+
+    it 'hidden place symbol is *' do
+      configuration.hidden_place_symbol = '*'
+
+      expect(configuration.hidden_place_symbol)
+        .to eq('*')
+    end
+  end
 end
